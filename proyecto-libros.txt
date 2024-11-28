@@ -1,0 +1,49 @@
+-----------------------------------
+Problematica: Problemas para calcular precio de libro
+Ojetivo: calcular el precio de los libros, guardar el precio por nombre, con el tipo.
+-----------------------------------
+#Crear el diccionario
+#la lista que contenga el diccionario
+#todo debe pasar dentro de un menu: "guardar libro, consultar, editar, borrar, detalles"
+
+"""Paso 1: 
+Pedir el nombre del libro (Nombre-escuela-grado)
+Preguntar cuantas hojas son simple faz:
+Preguntar cuantas hojas son doble faz:
+Preguntar cuantas hojas son simple faz color:
+Preguntar cuantas hojas son doble faz color:      
+
+Agregar una descripcion que te muestre cuantas hojas tenes de cada tipo y te muestre el numero que se le asigno:
+Asigna 1 hojas son simple faz:
+Asigna 2 hojas son doble faz:
+Asigna 3 hojas son simple faz color:
+Asigna 4 cuantas hojas son doble faz color:
+Asigna 5 si es mixto
+
+"""
+
+"""Paso 2: 
+Calcular el precio de las hojas 
+multiplicar la cantidad de hojas de cada tipo por el precio que corresponda
+sumar todos los resultados
+AUN NO HECHO(Si son mas de 100 hojas se les hace un descuento (permite preguntar al usuario de cuanto es el descuento))"""
+"""
+
+"""Paso 3:
+Crear un diccionario que guarde el nombre del libro más el precio y el numero que se le asigno segun su tipo
+y con ese diccionario hacer una lista de diccionarios
+"""
+#En el menu una opcion detalle que te traiga, segun el nombre de un libro, todos sus detalles separados (o sea cantidad de cada tipo de hoja, precio del anillado y todos los tipos disponibles para ese nombre)
+#Tambien se podria hacer una especie de ticket con todos estos datos y el precio 
+"""Paso 4:
+Un buscador dentro del diccionario que te traiga todos los datos asociados a ese nombre
+¿Que pasa si n nombre tiene asignado mas de un precio y tipo? o sea mismo libro, precio a color o precio blanco y negro
+Si, vamos a ver como mierda lo hago :O """
+
+"""Paso 5:
+Crear una base de datos vinculada que me guarde toda la informacion de la lista de diccionarios en la que pueda realizar consultas simples
+#Tambien me gustaria que guarde un enlace a una carpeta de drive que guarde el libro
+Ademas un ID que sea INTEGER PRIMARY KEY AUTOINCREMENT
+
+"""
+
