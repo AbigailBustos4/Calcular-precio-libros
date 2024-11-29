@@ -1,4 +1,3 @@
-lista = []
 while True:
     print("\n *** Venta de libros ***")
     print("1. Agregar un libro nuevo")
@@ -11,6 +10,7 @@ while True:
     if opcion == 1: #paso 1
         from paso1 import agregar_libro
         agregar_libro()
+        
         while True:
             print("¿Qué deseas hacer ahora?")
             print("1. Agregar otro libro")
@@ -23,9 +23,9 @@ while True:
             else:
                 print("Opcion no valida. Volviendo al menú")
                 break
-    elif opcion == 2: 
-        #Tengo que poder hacer consultas en toda la lista de libros
-        pass
+    elif opcion == 2:
+        from paso2 import consultas
+        consultas()
     elif opcion == 3:
         #edito algun dato del libro
         pass

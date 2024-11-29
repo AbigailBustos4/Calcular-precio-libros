@@ -59,3 +59,12 @@ def agregar_libro():
     lista.append(libro)
 
     print(f"Libro agregado con exito. El precio es ${precio_libro}")
+    #mostrar libros
+    print("\nLista de libros:")
+    for libro in lista:
+        print(f"Nombre: {libro['Nombre']}, Tipo: {libro['Tipo']}, Precio: ${libro['Precio']}")
+
+
+
+
+

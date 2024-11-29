@@ -22,23 +22,37 @@ Asigna 5 si es mixto
 
 """
 
-"""Paso 2: 
+"""Paso 1.1: 
 Calcular el precio de las hojas 
 multiplicar la cantidad de hojas de cada tipo por el precio que corresponda
 sumar todos los resultados
 AUN NO HECHO(Si son mas de 100 hojas se les hace un descuento (permite preguntar al usuario de cuanto es el descuento))"""
 """
 
-"""Paso 3:
+"""Paso 1.3:
 Crear un diccionario que guarde el nombre del libro más el precio y el numero que se le asigno segun su tipo
 y con ese diccionario hacer una lista de diccionarios
 """
-#En el menu una opcion detalle que te traiga, segun el nombre de un libro, todos sus detalles separados (o sea cantidad de cada tipo de hoja, precio del anillado y todos los tipos disponibles para ese nombre)
-#Tambien se podria hacer una especie de ticket con todos estos datos y el precio 
-"""Paso 4:
+
+
+"""Paso 2:
+Realizar consultas
 Un buscador dentro del diccionario que te traiga todos los datos asociados a ese nombre
 ¿Que pasa si n nombre tiene asignado mas de un precio y tipo? o sea mismo libro, precio a color o precio blanco y negro
-Si, vamos a ver como mierda lo hago :O """
+Si, vamos a ver como mierda lo hago :O 
+#En el menu una opcion detalle que te traiga, segun el nombre de un libro, todos sus detalles separados (o sea cantidad de cada tipo de hoja, precio del anillado y todos los tipos disponibles para ese nombre)
+#Tambien se podria hacer una especie de ticket con todos estos datos y el precio 
+"""
+
+
+
+""""Paso 3:
+Editar contenido de diccionario o lista
+""""
+
+""""Paso 4:
+Eliminar algun libro, con todos sus datos.
+""""
 
 """Paso 5:
 Crear una base de datos vinculada que me guarde toda la informacion de la lista de diccionarios en la que pueda realizar consultas simples
