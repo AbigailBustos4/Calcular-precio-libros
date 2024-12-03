@@ -35,10 +35,12 @@ while True:
         break
     elif opcion == 3:
         #edito algun dato del libro
-        pass
+        from paso3 import editar
+        editar()
     elif opcion == 4:
         #elimino algun libro que ya no se use
-        pass
+        from paso4 import eliminar
+        eliminar()
     elif opcion == 5:
         #Realizo un consulta especifica
         from paso2 import consulta_especifica
