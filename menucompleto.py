@@ -1,16 +1,22 @@
 while True:
     print("\n *** Venta de libros ***")
     print("1. Agregar un libro nuevo")
-    print("2. Consultar precio de un libro")
-    print("3. Editar algun libro")
+    print("2. Mostrar la lista completa de libros")
+    print("3. Editar algún libro")
     print("4. Eliminar libro")
-    print("5. Salir")
+    print("5. Realizar una consulta específica")
+    print("6. Salir")
+    opcion = int(input("Elige una opcion del 1 al 6: "))
+    """    try:  
+        opcion = int(input("Elige una opcion del 1 al 5: "))
+    except ValueError:
+        print("ERROR: Escribe un número")
+        break"""
 
-    opcion = int(input("Elige una opcion del 1 al 5: "))
     if opcion == 1: #paso 1
         from paso1 import agregar_libro
         agregar_libro()
-        
+        1
         while True:
             print("¿Qué deseas hacer ahora?")
             print("1. Agregar otro libro")
@@ -26,6 +32,7 @@ while True:
     elif opcion == 2:
         from paso2 import consultas
         consultas()
+        break
     elif opcion == 3:
         #edito algun dato del libro
         pass
@@ -33,6 +40,10 @@ while True:
         #elimino algun libro que ya no se use
         pass
     elif opcion == 5:
+        #Realizo un consulta especifica
+        from paso2 import consulta_especifica
+        consulta_especifica()
+    elif opcion == 6:
         #guardar lista y diccionario
         print("¡Segui trabajando así, lo haces genial! Nos vemos ☺")
         break

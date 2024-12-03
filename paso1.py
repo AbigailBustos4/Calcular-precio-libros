@@ -45,12 +45,13 @@ def agregar_libro():
         precio_anillado = 1400
     else:
         precio_anillado = 1800
-
+    #Deberia mostrar el precio del anillado y preguntar si lo quiere anillado o no. Si lo anillamos pasa a ser el precio total con anillado. y deberia quedar en alguna parrte de la table
     #precio total del libro
     precio_libro = precio_anillado + precio_hojas
-
+    nuevo_id = len(lista) + 1
     #Creo mi diccionario con el libro y sus datos
     libro = {
+        "ID": nuevo_id,
         "Nombre": nombre,
         "Tipo": tipo,
         "Precio": precio_libro
@@ -60,9 +61,7 @@ def agregar_libro():
 
     print(f"Libro agregado con exito. El precio es ${precio_libro}")
     #mostrar libros
-    print("\nLista de libros:")
-    for libro in lista:
-        print(f"Nombre: {libro['Nombre']}, Tipo: {libro['Tipo']}, Precio: ${libro['Precio']}")
+
 
 
 

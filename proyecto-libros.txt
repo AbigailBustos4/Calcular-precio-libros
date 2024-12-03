@@ -39,8 +39,9 @@ y con ese diccionario hacer una lista de diccionarios
 Realizar consultas
 Un buscador dentro del diccionario que te traiga todos los datos asociados a ese nombre
 ¿Que pasa si n nombre tiene asignado mas de un precio y tipo? o sea mismo libro, precio a color o precio blanco y negro
-Si, vamos a ver como mierda lo hago :O 
-#En el menu una opcion detalle que te traiga, segun el nombre de un libro, todos sus detalles separados (o sea cantidad de cada tipo de hoja, precio del anillado y todos los tipos disponibles para ese nombre)
+Si, vamos a ver como mierda lo hago :O """
+""" Paso 2.1:
+En el menu una opcion detalle que te traiga, segun el nombre de un libro, todos sus detalles separados (o sea cantidad de cada tipo de hoja, precio del anillado y todos los tipos disponibles para ese nombre)
 #Tambien se podria hacer una especie de ticket con todos estos datos y el precio 
 """
 
