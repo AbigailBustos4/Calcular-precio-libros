@@ -12,25 +12,25 @@ esto es de un intento de opccion :     nombre_libro = input("ingrese el nombre d
                 print("\n--- Información del libro ---")
                 print(f"Nombre: {libro['nombre']}")  
 """
-from paso1 import lista
 def consultas():
+    from paso1 import lista
     while True:
-        print("1. Mostrar la lista de libros disponibles")
-        print("2. Volver al menú")
-        opcion3 = int(input("Elija una opcion: "))
+        print("\nLista de libros disponibles:")
+        for libro in lista:
+            print(f"Nombre: {libro['Nombre']}, Tipo: {libro['Tipo']}, Precio: ${libro['Precio']}, ID: {libro['ID']}")
 
-        if opcion3 == 1: 
-            print("\n *** Lista de libros ***")
-            for libro in lista:
-                print(f"Nombre: {libro['Nombre']}, Tipo: {libro['Tipo']}, Precio: ${libro['Precio']}, ID: {libro['ID']}")
-        elif opcion3 == 2: 
-            print("Volviendo al menú...")
+        print("Presiona Enter para volver al menú principal")
+        opcion3 = input(" ")
+
+        if opcion3 == "":
+            print("Volviendo al menú principal...")
             break
         else:
-            print("Opcion no encontrada, vuelva a intentar")
-            
+            print("Opción no válida. Intente nuevamente.")
+
 
 def consulta_especifica():
+    from paso1 import lista
     while True:
         print("\n1. Buscar un libro")
         print("2. Volver al menú")
@@ -52,4 +52,4 @@ def consulta_especifica():
         else:
             print("Opción no válida. Intente nuevamente.")
 
-consulta_especifica()
+

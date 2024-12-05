@@ -14,7 +14,7 @@ def editar():
         
         print("¿Qué desea editar?")
         print("1. Nombre\n2. Tipo\n3. Precio")
-        a_editar = int(input("Elejir una opcion. (El id no es editable): "))
+        a_editar = int(input("Elegir una opcion. (El id no es editable): "))
         if a_editar == 1:
             nuevo_nombre = input("Ingrese el nuevo nombre: ")
             encontrado['Nombre'] = nuevo_nombre
