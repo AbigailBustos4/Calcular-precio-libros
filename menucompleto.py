@@ -14,7 +14,7 @@ while True:
         break"""
 
     if opcion == 1: #paso 1
-        from paso1 import agregar_libro
+        from agregarlibro import agregar_libro
         agregar_libro()
         while True:
             print("¿Qué deseas hacer ahora?")
@@ -29,19 +29,19 @@ while True:
                 print("Opcion no valida. Volviendo al menú")
                 break
     elif opcion == 2: #paso 2
-        from paso2 import consultas
+        from consultas import consultas
         consultas()
     elif opcion == 3: #paso 3
         #edito algun dato del libro
-        from paso3 import editar
+        from editar import editar
         editar()
     elif opcion == 4: #paso 4
-        from paso4 import eliminar
+        from eliminar import eliminar
         eliminar()
     elif opcion == 5: #paso 2
         #Realizo un consulta especifica
-        from paso2 import consulta_especifica
-        nombre_libro = input("¿Qué libro buscas?")
+        from consultas import consulta_especifica
+        nombre_libro = input(" ¿Qué libro buscas?")
         consulta_especifica(nombre_libro)
     elif opcion == 6:
         #guardar lista y diccionario
