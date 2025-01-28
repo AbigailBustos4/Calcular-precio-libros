@@ -41,7 +41,8 @@ while True:
     elif opcion == 5: #paso 2
         #Realizo un consulta especifica
         from paso2 import consulta_especifica
-        consulta_especifica()
+        nombre_libro = input("¿Qué libro buscas?")
+        consulta_especifica(nombre_libro)
     elif opcion == 6:
         #guardar lista y diccionario
         print("¡Segui trabajando así, lo haces genial! Nos vemos ☺")

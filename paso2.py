@@ -1,55 +1,60 @@
 
 """Paso 2:
 Realizar consultas
-Un buscador dentro del diccionario que te traiga todos los datos asociados a ese nombre
-¿Que pasa si n nombre tiene asignado mas de un precio y tipo? o sea mismo libro, precio a color o precio blanco y negro
-Si, vamos a ver como mierda lo hago :O 
+   - Conexión con la base de datos
+   - Consulta de libros desde la base de datos
+   - Mostrar resultados
+   - Cerrar la conexión al final
 #En el menu una opcion detalle que te traiga, segun el nombre de un libro, todos sus detalles separados (o sea cantidad de cada tipo de hoja, precio del anillado y todos los tipos disponibles para ese nombre)
 #Tambien se podria hacer una especie de ticket con todos estos datos y el precio 
-
-esto es de un intento de opccion :     nombre_libro = input("ingrese el nombre del libro a consultar: ")
-            if nombre_libro in lista:
-                print("\n--- Información del libro ---")
-                print(f"Nombre: {libro['nombre']}")  
 """
+from conexion import obtener_conexion
+
 def consultas():
-    from paso1 import lista
-    while True:
+    conexion = obtener_conexion()
+    if conexion is None:  
+        print("No se pudo conectar a la base de datos")
+        return
+
+    cursor = conexion.cursor()
+
+    try:
         print("\nLista de libros disponibles:")
-        for libro in lista:
-            print(f"Nombre: {libro['Nombre']}, Tipo: {libro['Tipo']}, Precio: ${libro['Precio']}, ID: {libro['ID']}")
+        cursor.execute("SELECT nombre, tipo, precio, id FROM libros") 
+        libros = cursor.fetchall()
 
-        print("Presiona Enter para volver al menú principal")
-        opcion3 = input(" ")
+        if libros:
+            for libro in libros:
+                print(f"Nombre: {libro[0]}, Tipo: {libro[1]}, Precio: ${libro[2]}, ID: {libro[3]}")
+        else: 
+            print("No hay libros disponibles en la base de datos.")
+    except mysql.connector.Error as e:
+        print(f"Error al realizar la consulta: {e}")
+    finally:
+        cursor.close()
+        conexion.close()
 
-        if opcion3 == "":
-            print("Volviendo al menú principal...")
-            break
+def consulta_especifica(nombre_libro):  
+    conexion = obtener_conexion()
+    if conexion is None:  
+        print("No se pudo conectar a la base de datos.")
+        return
+
+    cursor = conexion.cursor()
+    try:
+        #para buscar el libro por nombre 
+        cursor.execute("SELECT nombre, tipo, precio FROM libros WHERE LOWER(nombre) = LOWER(%s)", (nombre_libro,))
+        libros_encontrados = cursor.fetchall()
+
+        if libros_encontrados:
+            print("\n*** Libros encontrados ***")
+            for libro in libros_encontrados:
+                print(f"Nombre: {libro[0]}, Tipo: {libro[1]}, Precio: ${libro[2]}")
+                input("\nPresione Enter para continuar...")
         else:
-            print("Opción no válida. Intente nuevamente.")
-
-
-def consulta_especifica():
-    from paso1 import lista
-    while True:
-        print("\n1. Buscar un libro")
-        print("2. Volver al menú")
-        opcion4 = int(input("Elija una opción: "))
-
-        if opcion4 == 1:
-            nombre_libro = input("¿Qué libro estás buscando? ")
-            libros_encontrados = [libro for libro in lista if libro['Nombre'].lower() == nombre_libro.lower()] #Por cada libroen mi dic libro que esta en lista, si el libro(minusculaa) esta, se vuelve libro encontrado
-            
-            if libros_encontrados:
-                print("\n*** Libros encontrados ***")
-                for libro in libros_encontrados:
-                    print(f"Nombre: {libro['Nombre']}, Tipo: {libro['Tipo']}, Precio: ${libro['Precio']}")
-            else:
-                print("No se encontraron libros con ese nombre.")
-        elif opcion4 == 2:
-            print("Volviendo al menú...")
-            break
-        else:
-            print("Opción no válida. Intente nuevamente.")
-
-
+            print("No se encontraron libros con ese nombre.")
+    except mysql.connector.Error as e:
+        print(f"Error al realizar la consulta: {e}")
+    finally:
+        cursor.close()
+        conexion.close()
