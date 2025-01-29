@@ -6,13 +6,15 @@ while True:
     print("4. Eliminar libro")
     print("5. Realizar una consulta específica")
     print("6. Salir")
-    opcion = int(input("Elige una opcion del 1 al 6: "))
-    """    try:  
-        opcion = int(input("Elige una opcion del 1 al 5: "))
+    try:
+        opcion = int(input("Elige una opcion del 1 al 6: "))
+        if opcion < 1 or opcion > 6:
+            print("Opción no válida. Por favor elige entre 1 y 6.")
+            continue
     except ValueError:
         print("ERROR: Escribe un número")
-        break"""
-
+        continue
+    
     if opcion == 1: #paso 1
         from agregarlibro import agregar_libro
         agregar_libro()
@@ -20,14 +22,17 @@ while True:
             print("¿Qué deseas hacer ahora?")
             print("1. Agregar otro libro")
             print("2. Volver al menú")
-            opcion2 = int(input("elige una opción "))
-            if opcion2 == 2:
-                break
-            elif opcion2 == 1:
-                agregar_libro()
-            else:
-                print("Opcion no valida. Volviendo al menú")
-                break
+            try:
+                opcion2 = int(input("elige una opción "))
+                if opcion2 == 2:
+                    break
+                elif opcion2 == 1:
+                    agregar_libro()
+                else:
+                    print("Opcion no valida. Volviendo al menú")
+                    break
+            except ValueError:
+                print("Opción no valida. Volviendo al menu")
     elif opcion == 2: #paso 2
         from consultas import consultas
         consultas()
