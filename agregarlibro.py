@@ -21,28 +21,26 @@ conexion = mysql.connector.connect(
     port=3306  
 )"""
 
-from conexion import obtener_conexion 
+from nicegui import ui
+from conexion import obtener_conexion
+import mysql.connector
 
-""" Lista para almacenar los libros temporalmente que ya no esta en uso
-lista = []"""
-
-def agregar_libro():
+def agregar_libro_ui():
     try:
-        conexion = obtener_conexion()
-        if conexion is None:
-            print("No se pudo conectar a la base de datos.")
+        # Obtener los valores de los inputs
+        nombre = input_nombre.value.strip()
+        simple_faz = int(input_simple_faz.value or 0)
+        doble_faz = int(input_doble_faz.value or 0)
+        color_simple = int(input_color_simple.value or 0)
+        color_doble = int(input_color_doble.value or 0)
+        anillado = input_anillado.value == "1"
+
+        # Validar nombre
+        if not nombre:
+            ui.notify("El nombre del libro no puede estar vacío.", type="warning")
             return
 
-        cursor = conexion.cursor()
-
-        # información del libro
-        nombre = input("¿Cómo se llama el libro? ") 
-        simple_faz = int(input("¿Cuántas hojas simple ByN tiene? "))
-        doble_faz = int(input("¿Cuántas hojas doble ByN tiene? "))
-        color_simple = int(input("¿Cuántas hojas simple COLOR tiene? "))
-        color_doble = int(input("¿Cuántas hojas doble COLOR tiene? "))
-
-        # tipo del libro
+        # Calcular tipo del libro
         tipo = (
             1 if simple_faz > 0 and doble_faz == 0 and color_simple == 0 and color_doble == 0 else
             2 if doble_faz > 0 and simple_faz == 0 and color_simple == 0 and color_doble == 0 else
@@ -51,10 +49,10 @@ def agregar_libro():
             5
         )
 
-        # Calcular el precio de las hojas
+        # Calcular precio de las hojas
         precio_hojas = (simple_faz * 60) + (doble_faz * 80) + (color_simple * 150) + (color_doble * 230)
 
-        # Determinar el precio del anillado según la cantidad de hojas
+        # Calcular precio del anillado
         cantidad_hojas = simple_faz + doble_faz + color_simple + color_doble
         if cantidad_hojas <= 20:
             precio_anillado = 800
@@ -67,39 +65,56 @@ def agregar_libro():
         else:
             precio_anillado = 1800
 
-        # Preguntar si el libro será anillado
-        anillado = input("¿Desea que el libro sea anillado? (SI: 1 / NO: 2): ").strip().lower()
-        if anillado == "1":
+        # Calcular precio total
+        if anillado:
             nombre += " - Anillado"
             precio_libro = precio_hojas + precio_anillado
         else:
             nombre += " - Sin anillar"
             precio_libro = precio_hojas
 
-        # GUARDO el libro en la base de datos
+        # Conectar a la base de datos
+        conexion = obtener_conexion()
+        if conexion is None:
+            ui.notify("No se pudo conectar a la base de datos", type="negative")
+            return
+
+        # Insertar datos en la base de datos
+        cursor = conexion.cursor()
         sql = "INSERT INTO libros (nombre, tipo, precio) VALUES (%s, %s, %s)"
         valores = (nombre, tipo, precio_libro)
         cursor.execute(sql, valores)
         conexion.commit()
 
-        print(f"\nLibro agregado con éxito. El precio es ${precio_libro}. ID: {cursor.lastrowid}")
+        # Notificación de éxito
+        ui.notify(f"Libro agregado con éxito. Precio: ${precio_libro}. ID: {cursor.lastrowid}", type="positive")
+    
     except mysql.connector.Error as err:
-        print(f"Error al interactuar con la base de datos: {err}")
+        ui.notify(f"Error al interactuar con la base de datos: {err}", type="negative")
+    except ValueError:
+        ui.notify("Por favor, ingresa valores numéricos válidos.", type="negative")
     finally:
-        # Cerrar la conexión a la base de datos
         if 'conexion' in locals() and conexion.is_connected():
             conexion.close()
 
-"""FUERA DE USO
-        libro = {
-            "ID": cursor.lastrowid,
-            "Nombre": nombre,
-            "Tipo": tipo,
-            "Precio": precio_libro
-        }
-        lista.append(libro)"""
+# Crear la interfaz gráfica
+with ui.card().style("width: 400px; margin: auto; padding: 20px;"):
+    ui.label("Agregar un libro nuevo").style("font-size: 20px; font-weight: bold; text-align: center; margin-bottom: 20px;")
 
-    
+    # Inputs
+    input_nombre = ui.input("Nombre del libro").style("margin-bottom: 10px;")
+    input_simple_faz = ui.number("Hojas simple ByN").style("margin-bottom: 10px;")
+    input_doble_faz = ui.number("Hojas doble ByN").style("margin-bottom: 10px;")
+    input_color_simple = ui.number("Hojas simple COLOR").style("margin-bottom: 10px;")
+    input_color_doble = ui.number("Hojas doble COLOR").style("margin-bottom: 10px;")
+    input_anillado = ui.select({"1": "Sí", "2": "No"}, label="¿Anillado?").style("margin-bottom: 20px;")
+
+    # Botón para agregar libro
+    ui.button("Agregar libro", on_click=agregar_libro_ui).style("width: 100%;")
+
+# Ejecutar la app
+ui.run()
+
 
 
 
